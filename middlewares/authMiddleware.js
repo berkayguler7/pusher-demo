@@ -4,7 +4,10 @@ const authMiddleware = (req, res, next) => {
     const accessToken = req.cookies?.accessToken; // cookie patch
     const refreshToken = req.cookies?.refreshToken;
 
-    if (!accessToken && !refreshToken) return res.status(401).redirect('/page/login');
+    if (!accessToken && !refreshToken) {
+        console.log('No token provided');
+        return res.status(401).redirect('/login');
+    }
     try {
         const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
         console.log('Access token is valid:', decoded);

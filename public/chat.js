@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function sendMessage(message) {
       const li = document.createElement('li');
       li.textContent = message;
-      //messagesList.appendChild(li);
       scrollToBottom();
       fetch('/message', {
         method: 'POST',
