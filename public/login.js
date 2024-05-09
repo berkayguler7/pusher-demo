@@ -14,7 +14,6 @@ loginForm.addEventListener('submit', async (e) => {
   const data = await response.json();
   console.log(data);
   if (response.ok) {
-    // set cookie
     document.cookie = `accessToken=${data.accessToken}`;
     document.cookie = `refreshToken=${data.refreshToken}`;
     window.location.href = '/page/chat';
