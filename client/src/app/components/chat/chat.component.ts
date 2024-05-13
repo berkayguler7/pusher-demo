@@ -33,7 +33,6 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     this.pusherService.sendMessage(this.newMessage.trim());
     this.newMessage = '';
-    this.scrollToBottom();
   }
 
   scrollToBottom() {
