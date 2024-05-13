@@ -21,6 +21,7 @@ export class AuthService {
   logout() {
     document.cookie = 'accessToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
     document.cookie = 'refreshToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-    window.location.href = '/login';
+    localStorage.removeItem('accessToken');
+    return this.http.post(`${this.apiURL}/logout`, {});
   }
 }

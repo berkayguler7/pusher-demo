@@ -23,19 +23,11 @@ export class PusherService {
 
   sendMessage(message: string) {
     if (message !== '') {
-      const accessToken = document.cookie
-        .split(';')
-        .find((cookie) => cookie.includes('accessToken'))
-        ?.split('=')[1] as string;
+      const accessToken = localStorage.getItem('accessToken') as string;
 
-      console.log('message', message)
-      console.log('accessToken', accessToken)
-      console.log('apiURL', env.apiURL)
-      console.log('headers', {
-        'Content-Type': 'application/json',
-        Authorization: accessToken,
-      })
-
+      if (!accessToken) {
+        window.location.href = '/login';
+      }
 
       let context = this.http.post(
           env.apiURL + '/message',
@@ -48,7 +40,6 @@ export class PusherService {
             withCredentials: true,
           },
         ).subscribe();
-      console.log('context', context)
     }
   }
 }

@@ -5,5 +5,6 @@ const authValidator = require('../middlewares/validators/authValidator');
 
 router.post('/register', authValidator.validateRegister, userController.register);
 router.post('/login', authValidator.validateLogin, userController.login);
+router.post('/logout', userController.logout);
 
 module.exports = router;

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import env from '../../../environments/environment';
 import { PusherService } from '../../services/pusher.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -12,7 +11,7 @@ export class ChatComponent implements OnInit {
   messages: string[] = [];
   newMessage: string = '';
 
-  constructor(private http: HttpClient, private pusherService: PusherService) {}
+  constructor(private pusherService: PusherService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.pusherService.subscribeToChannel('chat', 'message', (data: { user: string; message: string }) => {
@@ -20,13 +19,10 @@ export class ChatComponent implements OnInit {
       this.scrollToBottom();
     })
 
-    const accessToken = document.cookie
-      .split(';')
-      .find((cookie) => cookie.includes('accessToken'))
-      ?.split('=')[1] as string;
+    const accessToken = localStorage.getItem('accessToken') as string;
 
     if (!accessToken) {
-      window.location.href = '/page/login';
+      window.location.href = '/login';
     }
   }
 
@@ -40,5 +36,10 @@ export class ChatComponent implements OnInit {
       const chatWindow = document.getElementById('chat-window');
       if (chatWindow) chatWindow.scrollTop = chatWindow.scrollHeight;
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    window.location.href = '/login';
   }
 }

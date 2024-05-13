@@ -50,4 +50,9 @@ const login = async (req, res) => {
     }
 };
 
-module.exports = { register, login };
+const logout = async (req, res) => {
+    res.clearCookie('refreshToken');
+    res.status(200).json({ message: 'Logged out successfully' });
+};
+
+module.exports = { register, login, logout };

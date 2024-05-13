@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const authMiddleware = (req, res, next) => {
-    const accessToken = req.cookies?.accessToken; // cookie patch
+    const accessToken = req.header('Authorization')?.split(' ')[1];
     const refreshToken = req.cookies?.refreshToken;
 
     if (!accessToken && !refreshToken) {

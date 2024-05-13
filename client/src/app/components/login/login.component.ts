@@ -19,7 +19,7 @@ export class LoginComponent {
     this.authService.login(this.email, this.password).subscribe((response: any) => {
       console.log("login response", response);
       if (response) {
-        document.cookie = `accessToken=${response.accessToken}`;
+        localStorage.setItem('accessToken', response.accessToken);
         document.cookie = `refreshToken=${response.refreshToken}`;
         this.router.navigateByUrl('/chat');
       }
