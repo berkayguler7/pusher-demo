@@ -9,6 +9,7 @@
     id="message-input"
     placeholder="Type your message..."
     [(ngModel)]="newMessage"
+    (keyup.enter)="sendMessage()"
   />
   <button (click)="sendMessage()">Send</button>
 </div>
