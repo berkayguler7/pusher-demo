@@ -29,7 +29,7 @@ export class PusherService {
         window.location.href = '/login';
       }
 
-      let context = this.http.post(
+      this.http.post(
           env.apiURL + '/message',
           { message },
           {
